@@ -2,7 +2,7 @@ package FSMSandbox;
 
 public class FSMSanbox {
     public static void main(String[] args) {
-        String input = "12.56.3 ";
+        String input = "12.563 ";
 
         IntegerFSM fsm = new IntegerFSM();
 
