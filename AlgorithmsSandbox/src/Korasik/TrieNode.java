@@ -1,22 +1,56 @@
 package Korasik;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 public class TrieNode {
+    private final Character EMPTY_CHAR_VALUE='.';
     protected List<TrieNode> children= new ArrayList<TrieNode>();
-    protected Character charValue;
+
+
+
+    private Character charValue;
+    public Character getCharValue() {
+        return charValue;
+    }
+
     protected boolean endOfWord=false;
 
-    public TrieNode(Character value) {
+
+    private ITrieDrawer drawer = new TrieDrawerByDefault(); // only for printing of the trie
+
+    private int level=0;                  // only for printing of the trie
+    public int getLevel() {
+        return level;
+    }
+
+    private TrieNode parent = null;       // only for printing of the trie
+    public TrieNode getParent() {
+        return parent;
+    }
+
+    public TrieNode(ITrieDrawer drawer) {
+        this.charValue = EMPTY_CHAR_VALUE;
+        this.drawer = drawer;
+        this.level=0;
+    }
+
+//    public TrieNode(Character charValue, ITrieDrawer drawer) {
+//        this.charValue = charValue;
+//        this.drawer = drawer;
+//        this.level=0;
+//    }
+
+    private TrieNode(Character value, int level, TrieNode parent, ITrieDrawer drawer) {
         this.charValue = value;
+        this.level = level;
+        this.drawer = drawer;
+        this.parent = parent;
     }
 
     public void addChild(Character charValue) {
         if (children.stream().noneMatch(it -> it.charValue.equals(charValue))) {
-            children.add(new TrieNode(charValue));
+            children.add(new TrieNode(charValue, level+1, this, drawer));
         }
     }
 
@@ -26,7 +60,7 @@ public class TrieNode {
         return children.stream().filter(it -> it.charValue.equals(charValue))
                 .findFirst()
                 .orElseGet(() -> {
-                        TrieNode t = new TrieNode(charValue);
+                        TrieNode t = new TrieNode(charValue, level+1, this, drawer);
                         children.add(t);
                         return t;
                  });
@@ -44,18 +78,18 @@ public class TrieNode {
 
     @Override
     public String toString() {
-        String res = charValue.toString() + " [";
+        String res="";
+        String childTabs="-".repeat(level);
+        res += childTabs+charValue+"\r\n";
+
         for (int i=0; i<children.size(); ++i) {
             res += children.get(i).toString();
         }
-        res +="]";
 
         return res;
     }
 
-    public void print() {
-        TrieNode tn = this;
-
-        System.out.println(tn.toString());
+    public void draw() {
+        drawer.draw(this);
     }
 }
