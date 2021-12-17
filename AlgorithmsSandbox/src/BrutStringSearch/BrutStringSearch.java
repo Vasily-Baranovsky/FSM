@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 public class BrutStringSearch implements SubstringSearcher{
-    List<String> dictionary = new ArrayList<>();
+    private List<String> dictionary = new ArrayList<>();
 
     @Override
     public void addToDictionary(String s) {
