@@ -30,6 +30,28 @@ class BrutStringSearchTest {
 
     }
 
+    //TODO сделать универсальный тест
+    void testSubstringSearcher(SubstringSearcher substringSearcher) {
+
+
+
+        // задать тестовые данные
+        // -- задать словарь для поиска
+        for (int i = 0; i <= NUMBER_OF_ITERATIONS; i++) {
+            testOneCase();
+        }
+
+        // -- задать строку, в которой будем искать
+//        String testSearchString = "";
+
+
+        // вызвать тестируемую функцию на тестовых данных
+
+        // протестить странные кейсы
+        // написать assert
+
+
+    }
 
     private void testOneCase() {
         StringSearchTestData testData = StringSearchTestData.generateTestData();
