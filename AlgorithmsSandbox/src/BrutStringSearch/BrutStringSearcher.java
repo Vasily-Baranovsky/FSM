@@ -5,14 +5,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class BrutStringSearch implements SubstringSearcher{
+public class BrutStringSearcher implements SubstringSearcher{
     private List<String> dictionary = new ArrayList<>();
+
+    public BrutStringSearcher(String[] dictionary) {
+        for (String s:dictionary) {
+            addToDictionary(s);
+        }
+    }
 
     @Override
     public void addToDictionary(String s) {
         dictionary.add(s);
     }
-
 
 
     @Override
@@ -27,7 +32,9 @@ public class BrutStringSearch implements SubstringSearcher{
                 boolean isSubstring = true;
                 String searchableString = dictionary.get(j);
                 for (int k = 0; k < searchableString.length(); k ++) {
-                    if (initialString.charAt(i + k) != searchableString.charAt(k)) {
+
+                    if ( i + k >= initialString.length() ||
+                            initialString.charAt(i + k) != searchableString.charAt(k)) {
                         isSubstring = false;
                         break;
                     }
