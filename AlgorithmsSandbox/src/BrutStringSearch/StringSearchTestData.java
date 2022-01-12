@@ -10,7 +10,6 @@ public class StringSearchTestData {
     final static int MAX_WORDS_IN_DICTIONARY = 10;
     final static int MAX_WORD_LENGTH = 10;
     final static int APPROX_MAX_GENERATED_STRING_LENGTH = 200;
-    final static double DICTIONARY_WORDS_DENSITY  = 0.5;
     String[] dictionary;
     String searchString;
     HashMap<String, List<Integer>> substringsMap;
@@ -46,7 +45,7 @@ public class StringSearchTestData {
         return generatedStrings;
     }
 
-    public static StringSearchTestData generateTestData() {
+    public static StringSearchTestData generateTestData(double dictionaryWordDensity) {
         StringSearchTestData testData = new StringSearchTestData();
         testData.dictionary = generateDictionary();
 
@@ -59,7 +58,7 @@ public class StringSearchTestData {
             String currentWord = null;
             double possibility = Math.random();
 
-            if (possibility < DICTIONARY_WORDS_DENSITY) {
+            if (possibility < dictionaryWordDensity) {
                 int wordIndex = (int)(Math.random()*testData.dictionary.length);
                 currentWord = testData.dictionary[wordIndex];
                 List<Integer> indexes = substringsMap.computeIfAbsent(currentWord, k -> new ArrayList<>());

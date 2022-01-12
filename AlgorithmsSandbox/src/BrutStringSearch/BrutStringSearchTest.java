@@ -7,6 +7,8 @@ import java.util.*;
 
 class BrutStringSearchTest {
     final int NUMBER_OF_ITERATIONS = 1000;
+    final static double DICTIONARY_WORDS_DENSITY  = 0.5;
+
 //    final char[] arrayOfAllowedCharacters = new char[] {'a', 'b', 'c', 'd', 'e', 'f', '1',}
 
     @Test
@@ -15,7 +17,7 @@ class BrutStringSearchTest {
         // задать тестовые данные
         // -- задать словарь для поиска
         for (int i = 0; i <= NUMBER_OF_ITERATIONS; i++) {
-            testOneCase();
+            testOneCase(DICTIONARY_WORDS_DENSITY);
         }
 
         // -- задать строку, в которой будем искать
@@ -25,12 +27,16 @@ class BrutStringSearchTest {
         // вызвать тестируемую функцию на тестовых данных
 
         // протестить странные кейсы
+
+        testOneCase(0);
+        testOneCase(1);
+
         // написать assert
 
 
     }
 
-    //TODO сделать универсальный тест
+    //TODO сделать универсальный тестd
     void testSubstringSearcher(SubstringSearcher substringSearcher) {
 
 
@@ -38,7 +44,7 @@ class BrutStringSearchTest {
         // задать тестовые данные
         // -- задать словарь для поиска
         for (int i = 0; i <= NUMBER_OF_ITERATIONS; i++) {
-            testOneCase();
+            testOneCase(DICTIONARY_WORDS_DENSITY);
         }
 
         // -- задать строку, в которой будем искать
@@ -53,8 +59,8 @@ class BrutStringSearchTest {
 
     }
 
-    private void testOneCase() {
-        StringSearchTestData testData = StringSearchTestData.generateTestData();
+    private void testOneCase(double dictionaryWordsDensity) {
+        StringSearchTestData testData = StringSearchTestData.generateTestData(dictionaryWordsDensity);
         HashMap<String, List<Integer>> searchResultMap;
 
         BrutStringSearcher brutStringSearcher = new BrutStringSearcher(testData.dictionary);

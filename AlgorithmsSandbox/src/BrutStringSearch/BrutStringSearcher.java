@@ -54,4 +54,6 @@ public class BrutStringSearcher implements SubstringSearcher{
 
         return resultSubstringMap;
     }
+
+
 }
