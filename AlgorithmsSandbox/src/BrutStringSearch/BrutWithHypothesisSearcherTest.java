@@ -3,9 +3,13 @@ package BrutStringSearch;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
-class BrutStringSearchTest {
+class BrutWithHypothesisSearcherTest {
+    //TODO сделать тестовые данные для тестирования глазами
     final int NUMBER_OF_ITERATIONS = 1000;
     final static double DICTIONARY_WORDS_DENSITY  = 0.5;
 
@@ -57,10 +61,11 @@ class BrutStringSearchTest {
     }
 
     private void testOneCase(double dictionaryWordsDensity) {
+
         StringSearchTestData testData = StringSearchTestData.generateTestData(dictionaryWordsDensity);
         HashMap<String, List<Integer>> searchResultMap;
 
-        BrutStringSearcher brutStringSearcher = new BrutStringSearcher(testData.dictionary);
+        BrutWithHypothesisSearcher brutStringSearcher = new BrutWithHypothesisSearcher(testData.dictionary);
         searchResultMap = brutStringSearcher.searchString(testData.searchString);
 
         Assertions.assertTrue(areMapsEqual(searchResultMap, testData.substringsMap));

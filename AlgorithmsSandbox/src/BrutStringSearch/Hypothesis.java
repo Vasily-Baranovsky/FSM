@@ -1,8 +1,8 @@
 package BrutStringSearch;
 
 public class Hypothesis {
-    private String dictionaryString;
-    private int startIndex;
+    private final String dictionaryString;
+    private final int startIndex;
     private int numberOfCheckedSymbols;
     public enum HypothesisState {
             TRUE,
@@ -31,5 +31,9 @@ public class Hypothesis {
 
     public int getStartIndex() {
         return startIndex;
+    }
+
+    public String getDictionaryString() {
+        return dictionaryString;
     }
 }
