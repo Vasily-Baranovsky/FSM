@@ -80,4 +80,22 @@ public class StringSearchTestData {
 
         return testData;
     }
+
+
+    //TODO сделать тестовые данные для тестирования глазами
+    public static StringSearchTestData generateManualTestData() {
+        StringSearchTestData testData = new StringSearchTestData();
+        testData.dictionary = new String[]{
+                "шоссе", "сушку", "сумка"
+        };
+
+        testData.searchString = "шла Саша по шоссе и сосала сушку";
+        HashMap<String, List<Integer>> substringsMap = new HashMap<>();
+        substringsMap.put("шоссе", Arrays.asList(12));
+        substringsMap.put("сушку", Arrays.asList(27));
+
+        testData.substringsMap = substringsMap;
+
+        return testData;
+    }
 }
