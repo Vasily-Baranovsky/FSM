@@ -16,6 +16,8 @@ class BrutWithHypothesisSearcherTest {
 
     @Test
     void searchString() {
+        System.out.println("----------Begin Test of BrutWithHypothesisSearcherTest---------------");
         SearcherUniversalTest.searchString(BrutWithHypothesisSearcher::new);
+        System.out.println("----------End Test of BrutWithHypothesisSearcherTest--------------");
     }
 }

@@ -13,6 +13,8 @@ class BrutStringSearchTest {
 
     @Test
     void searchString() {
+        System.out.println("----------Begin Test of BrutStringSearchTest---------------");
         SearcherUniversalTest.searchString(BrutStringSearcher::new);
+        System.out.println("----------End Test of BrutStringSearchTest--------------");
     }
 }

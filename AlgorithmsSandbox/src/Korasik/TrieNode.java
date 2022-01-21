@@ -54,7 +54,7 @@ public class TrieNode {
         }
     }
 
-    public TrieNode findOrCreateChild(Character charValue) {
+   public TrieNode findOrCreateChild(Character charValue) {
 
         // хеш мэпы для лохов!
         return children.stream().filter(it -> it.charValue.equals(charValue))
@@ -64,6 +64,14 @@ public class TrieNode {
                         children.add(t);
                         return t;
                  });
+    }
+
+    public TrieNode find(Character charValue) {
+
+        // ToDo: Заменить List children на Map children
+        return children.stream().filter(it -> it.charValue.equals(charValue))
+                .findFirst()
+                .orElse(null);
     }
 
     public void addWord(String word) {

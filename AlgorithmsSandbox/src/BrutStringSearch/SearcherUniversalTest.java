@@ -40,8 +40,6 @@ class SearcherUniversalTest {
     }
 
 
-    //TODO сделать универсальный тестd
-
     private static void testOneCase(double dictionaryWordsDensity, Function<String[], SubstringSearcher> fun) {
 
         StringSearchTestData testData = StringSearchTestData.generateTestData(dictionaryWordsDensity);
@@ -62,6 +60,9 @@ class SearcherUniversalTest {
         Assertions.assertTrue(
                 testCase(testData, fun)
         );
+
+//        System.out.println(fun.getClass().toString());
+
         // ToDo: вывести имя класса SubstringSearcher (и/или имя теста)
         System.out.println("SearchString testManualCase: Test passed");
     }
