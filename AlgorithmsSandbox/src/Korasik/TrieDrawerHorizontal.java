@@ -1,22 +1,26 @@
 package Korasik;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class TrieDrawerHorizontal implements ITrieDrawer {
     @Override
-    public void draw(TrieNode root) {
-        TrieNode tn = root;
+    public void draw(TrieNode trieNode) {
 
         // don't print root
-        if (tn.getLevel() > 0) {
-            String childTabs =  (tn.getParent().children.indexOf(tn)>0) ? "-".repeat(tn.getLevel()*2 - 1) : "-";
-            System.out.print(childTabs + tn.getCharValue());
+        if (trieNode.getLevel() > 0) {
+            List<TrieNode> lst = new ArrayList<>(trieNode.getParent().children.values());
+//            List<TrieNode> lst = tn.getParent().children;
+            String childTabs =  (lst.indexOf(trieNode)>0) ? "-".repeat(trieNode.getLevel()*2 - 1) : "-";
+            System.out.print(childTabs + trieNode.getCharValue());
         }
 
-        if (tn.children.size() == 0) {
+        if (trieNode.children.size() == 0) {
             System.out.println();
         }
 
-        for (int i=0; i<tn.children.size(); ++i) {
-            tn.children.get(i).draw();
+        for (TrieNode child : trieNode.children.values()) {
+            child.draw();
         }
     }
 }

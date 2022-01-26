@@ -1,12 +1,8 @@
 package BrutStringSearch;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.Function;
 
 class SearcherUniversalTest {
@@ -39,32 +35,31 @@ class SearcherUniversalTest {
 
     }
 
-
     private static void testOneCase(double dictionaryWordsDensity, Function<String[], SubstringSearcher> fun) {
 
         StringSearchTestData testData = StringSearchTestData.generateTestData(dictionaryWordsDensity);
-        Assertions.assertTrue(testCase(testData, fun));
-        System.out.println("SearchString testOneCase: Test passed");
+        SubstringSearcher stringSearcher = fun.apply(testData.dictionary);
+
+        Assertions.assertTrue(testCase(testData, stringSearcher));
+        System.out.println(stringSearcher.getClass().getSimpleName()+ ".searchString testOneCase: Test passed");
     }
 
-    private static boolean testCase(StringSearchTestData testData, Function<String[], SubstringSearcher> fun) {
-        SubstringSearcher stringSearcher = fun.apply(testData.dictionary);
-        HashMap<String, List<Integer>> searchResultMap;
-        searchResultMap = stringSearcher.searchString(testData.searchString);
+    private static boolean testCase(
+            StringSearchTestData testData,
+            SubstringSearcher stringSearcher) {
+
+        HashMap<String, List<Integer>> searchResultMap = stringSearcher.searchString(testData.searchString);
 
         return areMapsEqual(searchResultMap, testData.substringsMap);
     }
 
     private static void testManualCase(Function<String[], SubstringSearcher> fun) {
         StringSearchTestData testData = StringSearchTestData.generateManualTestData();
-        Assertions.assertTrue(
-                testCase(testData, fun)
-        );
+        SubstringSearcher stringSearcher = fun.apply(testData.dictionary);
+        Assertions.assertTrue(testCase(testData, stringSearcher));
 
-//        System.out.println(fun.getClass().toString());
-
-        // ToDo: вывести имя класса SubstringSearcher (и/или имя теста)
-        System.out.println("SearchString testManualCase: Test passed");
+        // Done: вывести имя класса SubstringSearcher (и/или имя теста)
+        System.out.println(stringSearcher.getClass().getSimpleName() + ".searchString testManualCase: Test passed");
     }
 
     private static boolean areMapsEqual (HashMap<String, List<Integer>> firstMap,

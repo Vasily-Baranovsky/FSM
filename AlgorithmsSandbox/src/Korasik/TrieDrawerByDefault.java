@@ -3,14 +3,14 @@ package Korasik;
 public class TrieDrawerByDefault implements ITrieDrawer {
 
     @Override
-    public void draw(TrieNode tn) {
+    public void draw(TrieNode trieNode) {
         //System.out.println(root.toString());
 
-        String childTabs="-".repeat(tn.getLevel());
-        System.out.println(childTabs+tn.getCharValue());
+        String childTabs="-".repeat(trieNode.getLevel());
+        System.out.println(childTabs+trieNode.getCharValue());
 
-        for (int i=0; i<tn.children.size(); ++i) {
-            tn.children.get(i).draw();
+        for (TrieNode child : trieNode.children.values()) {
+            child.draw();
         }
     }
 }

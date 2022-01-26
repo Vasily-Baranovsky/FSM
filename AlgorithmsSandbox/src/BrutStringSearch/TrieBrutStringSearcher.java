@@ -25,7 +25,7 @@ public class TrieBrutStringSearcher implements SubstringSearcher{
         HashMap<String, List<Integer>> resultSubstringMap = new HashMap<>();
 
         for (int i = 0; i < s.length(); i++) {
-            trie.
+//            trie.
         }
         return resultSubstringMap;
     }
