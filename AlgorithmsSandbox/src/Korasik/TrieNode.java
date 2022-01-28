@@ -51,10 +51,8 @@ public class TrieNode {
 
    public TrieNode findOrCreateChild(Character charValue) {
        if (!children.containsKey(charValue)) {
-           System.out.println("Adding Key="+charValue);
            TrieNode t = new TrieNode(charValue, level+1, this, drawer);
            children.put(charValue, t);
-           System.out.println(Arrays.toString(children.values().toArray()));
            return t;
        }
        else {
