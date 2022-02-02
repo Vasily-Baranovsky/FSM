@@ -1,2 +1,4 @@
-package Korasik;public class GettingWordFromNonEndNodeException {
+package Korasik;
+
+public class GettingWordFromNonEndNodeException extends Exception {
 }

@@ -1,5 +1,6 @@
 package BrutStringSearch;
 
+import Korasik.GettingWordFromNonEndNodeException;
 import Korasik.TrieDrawerHorizontal;
 import Korasik.TrieNode;
 
@@ -24,21 +25,39 @@ public class TrieBrutStringSearcher implements SubstringSearcher{
     @Override
     public HashMap<String, List<Integer>> searchString(String s) {
         HashMap<String, List<Integer>> resultSubstringMap = new HashMap<>();
-        ArrayList<TrieNode> hypothesysNodes = new ArrayList<>();
-        StringBuilder foundString = new StringBuilder();
+        ArrayList<TrieHypothesis> hypothesyss = new ArrayList<>();
 
         for (int i = 0; i < s.length(); i++) {
-            if (trie.findChild(s.charAt(i)) != null) {
-                hypothesysNodes.add(trie.findChild(s.charAt(i)));
-                foundString.append(s.charAt(i));
+            char currentChar = s.charAt(i);
+
+
+            TrieHypothesis newHypothesis = TrieHypothesis.checkAndCreate(trie, currentChar, i);
+            if (newHypothesis != null) {
+                hypothesyss.add(newHypothesis);
             }
-            for (int j = 0; j < hypothesysNodes.size();) {
-                TrieNode hypNode = hypothesysNodes.get(j);
-                if (hypNode.findChild(s.charAt(i)) != null) {
-                    if (hypNode.getChildren().isEmpty()) {
-                        hypothesysNodes.remove(j);
-                    }
+
+
+            int j = 0;
+            while (j < hypothesyss.size()) {
+                TrieHypothesis currentHypothesis = hypothesyss.get(j);
+                switch (currentHypothesis.checkTrieHypothesisState(currentChar)) {
+                    case TRUE:
+                        try {
+                            List<Integer> foundIndexes = resultSubstringMap.computeIfAbsent(currentHypothesis.getWord(),
+                                    k -> new ArrayList<>()
+                            );
+                            foundIndexes.add(currentHypothesis.getStartIndex());
+                        } catch (GettingWordFromNonEndNodeException e) {
+                            throw new RuntimeException("Все пошло по BNS");
+                        }
+                    case IN_PROGRESS:
+                        j++;
+                        break;
+
+                    case FALSE:
+                        hypothesyss.remove(j);
                 }
+
             }
         }
         return resultSubstringMap;

@@ -3,6 +3,7 @@ package Korasik;
 import java.util.*;
 
 public class TrieNode {
+
     private final Character EMPTY_CHAR_VALUE='.';
     protected Map<Character, TrieNode> children = new IdentityHashMap<>();
 
@@ -12,6 +13,10 @@ public class TrieNode {
     }
 
     protected boolean endOfWord=false;
+    public boolean isEndOfWord() {
+        return endOfWord;
+    }
+
     protected String word;
 
 
@@ -94,8 +99,13 @@ public class TrieNode {
         return children;
     }
 
-    public String getWord() {
-        return word;
+    public String getWord() throws GettingWordFromNonEndNodeException {
+        if (endOfWord) {
+            return word;
+        } else {
+            throw new GettingWordFromNonEndNodeException();
+        }
+
     }
 
     public void draw() {

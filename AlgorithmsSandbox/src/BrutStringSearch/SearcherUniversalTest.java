@@ -11,6 +11,9 @@ class SearcherUniversalTest {
 
     static void searchString(Function<String[], SubstringSearcher> fun) {
 
+        // ручное тестирование
+        testManualCase(fun);
+
         // задать тестовые данные
         // -- задать словарь для поиска
         for (int i = 0; i <= NUMBER_OF_ITERATIONS; i++) {
@@ -28,8 +31,7 @@ class SearcherUniversalTest {
         testOneCase(0, fun);
         testOneCase(1, fun);
 
-        // ручное тестирование
-        testManualCase(fun);
+
         // написать assert
 
 

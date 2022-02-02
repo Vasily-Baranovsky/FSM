@@ -1,14 +1,8 @@
 package BrutStringSearch;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-
-class BrutWithHypothesisSearcherTest {
+class TrieBrutStringSearcherTest {
     final int NUMBER_OF_ITERATIONS = 1000;
     final static double DICTIONARY_WORDS_DENSITY  = 0.5;
 
@@ -16,8 +10,8 @@ class BrutWithHypothesisSearcherTest {
 
     @Test
     void searchString() {
-        System.out.println("----------Begin Test of BrutWithHypothesisSearcherTest---------------");
-        SearcherUniversalTest.searchString(BrutWithHypothesisSearcher::new);
-        System.out.println("----------End Test of BrutWithHypothesisSearcherTest--------------");
+        System.out.println("----------Begin Test of TrieBrutStringSearcherTest---------------");
+        SearcherUniversalTest.searchString(TrieBrutStringSearcher::new);
+        System.out.println("----------End Test of TrieBrutStringSearcherTest--------------");
     }
 }
