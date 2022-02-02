@@ -12,6 +12,7 @@ public class TrieNode {
     }
 
     protected boolean endOfWord=false;
+    protected String word;
 
 
     private ITrieDrawer drawer = new TrieDrawerByDefault(); // only for printing of the trie
@@ -60,7 +61,7 @@ public class TrieNode {
        }
     }
 
-    public TrieNode find(Character charValue) {
+    public TrieNode findChild(Character charValue) {
         // Done: Заменить List children на Map children
         return children.getOrDefault(charValue, null);
     }
@@ -73,6 +74,7 @@ public class TrieNode {
         }
 
         tn.endOfWord = true;
+        tn.word = word;
     }
 
     @Override
@@ -86,6 +88,14 @@ public class TrieNode {
             res.append(child.toString());
         }
         return res.toString();
+    }
+
+    public Map<Character, TrieNode> getChildren() {
+        return children;
+    }
+
+    public String getWord() {
+        return word;
     }
 
     public void draw() {
