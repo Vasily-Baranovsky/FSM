@@ -13,6 +13,9 @@ public class TrieHypothesis {
     }
 
     public String getWord() throws GettingWordFromNonEndNodeException {
+        if (!foundNode.isEndOfWord()) {
+            throw new GettingWordFromNonEndNodeException();
+        }
         return foundNode.getWord();
     }
 

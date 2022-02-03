@@ -68,7 +68,7 @@ public class TrieNode {
 
     public TrieNode findChild(Character charValue) {
         // Done: Заменить List children на Map children
-        return children.getOrDefault(charValue, null);
+        return children.get(charValue);
     }
 
     public void addWord(String word) {

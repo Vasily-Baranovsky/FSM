@@ -25,21 +25,17 @@ public class TrieBrutStringSearcher implements SubstringSearcher{
     @Override
     public HashMap<String, List<Integer>> searchString(String s) {
         HashMap<String, List<Integer>> resultSubstringMap = new HashMap<>();
-        ArrayList<TrieHypothesis> hypothesyss = new ArrayList<>();
+        ArrayList<TrieHypothesis> hypotheses = new ArrayList<>();
 
         for (int i = 0; i < s.length(); i++) {
             char currentChar = s.charAt(i);
 
 
-            TrieHypothesis newHypothesis = TrieHypothesis.checkAndCreate(trie, currentChar, i);
-            if (newHypothesis != null) {
-                hypothesyss.add(newHypothesis);
-            }
-
-
             int j = 0;
-            while (j < hypothesyss.size()) {
-                TrieHypothesis currentHypothesis = hypothesyss.get(j);
+            while (j < hypotheses.size()) {
+                TrieHypothesis currentHypothesis = hypotheses.get(j);
+
+                //TODO Разделить переход состояния и его проверку для того, чтобы обрабатывать слова длинны 1
                 switch (currentHypothesis.checkTrieHypothesisState(currentChar)) {
                     case TRUE:
                         try {
@@ -55,9 +51,15 @@ public class TrieBrutStringSearcher implements SubstringSearcher{
                         break;
 
                     case FALSE:
-                        hypothesyss.remove(j);
+                        hypotheses.remove(j);
                 }
 
+            }
+
+
+            TrieHypothesis newHypothesis = TrieHypothesis.checkAndCreate(trie, currentChar, i);
+            if (newHypothesis != null) {
+                hypotheses.add(newHypothesis);
             }
         }
         return resultSubstringMap;
