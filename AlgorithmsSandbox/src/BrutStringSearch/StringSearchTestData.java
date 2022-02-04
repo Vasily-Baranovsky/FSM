@@ -86,13 +86,14 @@ public class StringSearchTestData {
     public static StringSearchTestData generateManualTestData() {
         StringSearchTestData testData = new StringSearchTestData();
         testData.dictionary = new String[]{
-                "шоссе", "сушку", "сумка"
+                "шоссе", "сушку", "сумка", "и"
         };
 
         testData.searchString = "шла Саша по шоссе и сосала сушку";
         HashMap<String, List<Integer>> substringsMap = new HashMap<>();
         substringsMap.put("шоссе", Arrays.asList(12));
         substringsMap.put("сушку", Arrays.asList(27));
+        substringsMap.put("и", Arrays.asList(18));
 
         testData.substringsMap = substringsMap;
 
