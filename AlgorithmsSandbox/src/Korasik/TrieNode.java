@@ -5,7 +5,7 @@ import java.util.*;
 public class TrieNode {
 
     private final Character EMPTY_CHAR_VALUE='.';
-    protected Map<Character, TrieNode> children = new IdentityHashMap<>();
+    protected Map<Character, TrieNode> children = new HashMap<>();
 
     private Character charValue;
     public Character getCharValue() {
