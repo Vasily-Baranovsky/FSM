@@ -5,7 +5,7 @@ import java.util.*;
 public class TrieNode {
 
     private final Character EMPTY_CHAR_VALUE='.';
-    protected Map<Character, TrieNode> children = new HashMap<>();
+    protected Map<Character, TrieNode> children = new TreeMap<>();
 
     private Character charValue;
     public Character getCharValue() {
@@ -22,8 +22,15 @@ public class TrieNode {
 
     private ITrieDrawer drawer = new TrieDrawerByDefault(); // only for printing of the trie
 
-    private int level;                  // only for printing of the trie
+    // only for printing of the trie
     public int getLevel() {
+        int level=0;
+        TrieNode tn = this.parent;
+        while(tn!=null) {
+            level++;
+            tn = tn.parent;
+        }
+
         return level;
     }
 
@@ -34,30 +41,27 @@ public class TrieNode {
 
     public TrieNode() {
         this.charValue = EMPTY_CHAR_VALUE;
-        this.level=0;
     }
     public TrieNode(ITrieDrawer drawer) {
         this.charValue = EMPTY_CHAR_VALUE;
         this.drawer = drawer;
-        this.level=0;
     }
 
-    private TrieNode(Character value, int level, TrieNode parent, ITrieDrawer drawer) {
+    private TrieNode(Character value, TrieNode parent, ITrieDrawer drawer) {
         this.charValue = value;
-        this.level = level;
         this.drawer = drawer;
         this.parent = parent;
     }
 
     public void addChild(Character charValue) {
         if (!children.containsKey(charValue)) {
-            children.put(charValue, new TrieNode(charValue, level+1, this, drawer));
+            children.put(charValue, new TrieNode(charValue, this, drawer));
         }
     }
 
    public TrieNode findOrCreateChild(Character charValue) {
        if (!children.containsKey(charValue)) {
-           TrieNode t = new TrieNode(charValue, level+1, this, drawer);
+           TrieNode t = new TrieNode(charValue, this, drawer);
            children.put(charValue, t);
            return t;
        }
@@ -85,7 +89,7 @@ public class TrieNode {
     @Override
     public String toString() {
         StringBuilder res= new StringBuilder();
-        String childTabs="-".repeat(level);
+        String childTabs="-".repeat(getLevel());
         res.append(childTabs).append(charValue).append("\r\n");
 
         List<TrieNode> lst = new ArrayList<>(children.values());
