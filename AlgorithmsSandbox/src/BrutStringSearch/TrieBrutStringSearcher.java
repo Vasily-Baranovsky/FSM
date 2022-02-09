@@ -36,7 +36,7 @@ public class TrieBrutStringSearcher implements SubstringSearcher{
                 TrieHypothesis currentHypothesis = hypotheses.get(j);
 
                 //TODO Разделить переход состояния и его проверку для того, чтобы обрабатывать слова длинны 1
-                switch (currentHypothesis.checkTrieHypothesisState(currentChar)) {
+                switch (currentHypothesis.updateAndReturnTrieHypothesisState(currentChar)) {
                     case TRUE:
                         try {
                             List<Integer> foundIndexes = resultSubstringMap.computeIfAbsent(currentHypothesis.getWord(),
@@ -59,6 +59,16 @@ public class TrieBrutStringSearcher implements SubstringSearcher{
 
             TrieHypothesis newHypothesis = TrieHypothesis.checkAndCreate(trie, currentChar, i);
             if (newHypothesis != null) {
+                if (newHypothesis.checkHypothesisState() == TrieHypothesis.HypothesisState.TRUE) {
+                    try {
+                        List<Integer> foundIndexes = resultSubstringMap.computeIfAbsent(newHypothesis.getWord(),
+                                k -> new ArrayList<>()
+                        );
+                        foundIndexes.add(newHypothesis.getStartIndex());
+                    } catch (GettingWordFromNonEndNodeException e) {
+                        throw new RuntimeException("Все пошло по BNS");
+                    }
+                }
                 hypotheses.add(newHypothesis);
             }
         }

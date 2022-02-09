@@ -40,14 +40,18 @@ public class TrieHypothesis {
         this.foundNode = foundNode;
     }
 
-    public HypothesisState checkTrieHypothesisState(char currentChar) {
+    public HypothesisState updateAndReturnTrieHypothesisState(char currentChar) {
         TrieNode nextNode = foundNode.findChild(currentChar);
         if (nextNode == null) {
             return HypothesisState.FALSE;
         }
         foundNode = nextNode;
 
-        return nextNode.isEndOfWord() ? HypothesisState.TRUE : HypothesisState.IN_PROGRESS;
+        return checkHypothesisState();
+    }
+
+    public HypothesisState checkHypothesisState() {
+        return foundNode.isEndOfWord() ? HypothesisState.TRUE : HypothesisState.IN_PROGRESS;
     }
 
 }
