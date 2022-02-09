@@ -8,10 +8,10 @@ public class TrieDrawerHorizontal implements ITrieDrawer {
     public void draw(TrieNode trieNode) {
 
         // don't print root
-        if (trieNode.getLevel() > 0) {
+        int level = trieNode.getLevel();
+        if (level > 0) {
             List<TrieNode> lst = new ArrayList<>(trieNode.getParent().children.values());
-//            List<TrieNode> lst = tn.getParent().children;
-            String childTabs =  (lst.indexOf(trieNode)>0) ? "-".repeat(trieNode.getLevel()*2 - 1) : "-";
+            String childTabs =  (lst.indexOf(trieNode)>0) ? "-".repeat(level*2 - 1) : "-";
             System.out.print(childTabs + trieNode.getCharValue());
         }
 
