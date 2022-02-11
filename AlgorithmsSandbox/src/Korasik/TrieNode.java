@@ -22,6 +22,26 @@ public class TrieNode {
 
     private ITrieDrawer drawer = new TrieDrawerByDefault(); // only for printing of the trie
 
+    private TrieNode suffixLink;
+
+    private TrieNode outputLink;
+
+    public TrieNode getSuffixLink() {
+        return suffixLink;
+    }
+
+    public void setSuffixLink(TrieNode suffixLink) {
+        this.suffixLink = suffixLink;
+    }
+
+    public TrieNode getOutputLink() {
+        return outputLink;
+    }
+
+    public void setOutputLink(TrieNode outputLink) {
+        this.outputLink = outputLink;
+    }
+
     // only for printing of the trie
     public int getLevel() {
         int level=0;
@@ -114,5 +134,40 @@ public class TrieNode {
 
     public void draw() {
         drawer.draw(this);
+    }
+
+    public void buildSuffixLinks() {
+        TrieNode root = this;
+        root.setSuffixLink(null);
+        LinkedList<TrieNode> nodesQueue = new LinkedList<>();
+
+        for (TrieNode child: root.getChildren().values()) {
+            child.setSuffixLink(root);
+            child.setOutputLink(null);
+            nodesQueue.add(child);
+        }
+
+        while(!nodesQueue.isEmpty()) {
+            TrieNode currentNode = nodesQueue.pop();
+            for(TrieNode child: currentNode.getChildren().values()) {
+                TrieNode currentSuffixCandidateParent = currentNode.getSuffixLink();
+                child.setSuffixLink(root);
+                while (currentSuffixCandidateParent != null) {
+                    TrieNode foundNodeBySuffixLink = currentSuffixCandidateParent.findChild(child.getCharValue());
+                    if(foundNodeBySuffixLink != null) {
+                        if (foundNodeBySuffixLink.endOfWord) {
+                            child.setOutputLink(foundNodeBySuffixLink);
+                        } else {
+                            child.setOutputLink(foundNodeBySuffixLink.getOutputLink());
+                        }
+                        child.setSuffixLink(foundNodeBySuffixLink);
+                        break;
+                    } else {
+                        currentSuffixCandidateParent = currentSuffixCandidateParent.getSuffixLink();
+                    }
+                }
+                nodesQueue.add(child);
+            }
+        }
     }
 }
