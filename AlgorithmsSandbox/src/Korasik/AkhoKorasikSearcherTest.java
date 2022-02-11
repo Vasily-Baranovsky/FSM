@@ -1,8 +1,10 @@
-package BrutStringSearch;
+package Korasik;
 
+import BrutStringSearch.SearcherUniversalTest;
+import BrutStringSearch.TrieBrutStringSearcher;
 import org.junit.jupiter.api.Test;
 
-class TrieBrutStringSearcherTest {
+class AkhoKorasikSearcherTest {
     final int NUMBER_OF_ITERATIONS = 1000;
     final static double DICTIONARY_WORDS_DENSITY  = 0.5;
 
@@ -11,7 +13,7 @@ class TrieBrutStringSearcherTest {
     @Test
     void searchString() {
         System.out.println("----------Begin Test of TrieBrutStringSearcherTest---------------");
-        SearcherUniversalTest.searchString(TrieBrutStringSearcher::new);
+        SearcherUniversalTest.searchString(AkhoKorasikSearcher::new);
         System.out.println("----------End Test of TrieBrutStringSearcherTest--------------");
     }
 }

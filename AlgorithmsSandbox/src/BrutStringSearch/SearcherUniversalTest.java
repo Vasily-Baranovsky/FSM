@@ -5,11 +5,11 @@ import org.junit.jupiter.api.Assertions;
 import java.util.*;
 import java.util.function.Function;
 
-class SearcherUniversalTest {
+public class SearcherUniversalTest {
     final static int NUMBER_OF_ITERATIONS = 1000;
     final static double DICTIONARY_WORDS_DENSITY  = 0.5;
 
-    static void searchString(Function<String[], SubstringSearcher> fun) {
+    public static void searchString(Function<String[], SubstringSearcher> fun) {
 
         // ручное тестирование
         testManualCase(fun);
