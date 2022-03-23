@@ -37,7 +37,7 @@ public class AkhoKorasikSearcher implements SubstringSearcher {
                 List<String> searchResult = automaton.handleSymbol(s.charAt(i));
                 for (String word: searchResult) {
                     List<Integer> indexies = result.computeIfAbsent(word, a -> new ArrayList<>());
-                    indexies.add(i);
+                    indexies.add(i-word.length()+1);
                 }
             } catch (GettingWordFromNonEndNodeException exception) {
                 throw new RuntimeException("You are trying to get word from non end element");
