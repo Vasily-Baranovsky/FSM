@@ -1,9 +1,11 @@
 package Algorithms;
 
-import java.util.HashMap;
+import java.sql.SQLOutput;
+import java.util.*;
 
 public class Permutation {
     public static boolean isPermutation(String s1, String s2) {
+
         if (s1.length() != s2.length()) {
             return false;
         }
@@ -32,8 +34,11 @@ public class Permutation {
 
     public static void main(String[] args) {
         String s1 = "aaaaa";
-        String s2 = "aaaa ";
+        String s2 = "aaaa ssss";
+
+        String[] str = s2.split(" ");
 
         System.out.println(isPermutation(s1, s2));
+
     }
 }
