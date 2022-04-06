@@ -46,8 +46,10 @@ public class OneAway {
             return false;
         }
 
+
+
         int counter = 0;
-        for (int i = 0; i < strShort.length(); i++) {
+        for (int i = 0; i-counter < strShort.length(); i++) {
             if (strLong.charAt(i) != strShort.charAt(i-counter)) {
                 counter++;
             }
@@ -56,6 +58,10 @@ public class OneAway {
                 return false;
             }
         }
+
+//        if (counter == 1) {
+//            return false;
+//        }
 
         return true;
     }
