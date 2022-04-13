@@ -12,6 +12,10 @@ public class StringCompression {
 
     public static String compress(String str) {
 
+        if (str.length() == 0) {
+            return str;
+        }
+
         int counter=1;
         char ch=str.charAt(0);
         StringBuilder builder = new StringBuilder();
@@ -47,7 +51,6 @@ public class StringCompression {
             return compressedString;
         }
 
-        int counter=0;
         char ch=compressedString.charAt(0);
 
         StringBuilder builder = new StringBuilder(ch);
@@ -55,7 +58,6 @@ public class StringCompression {
         for (int i = 1; i < compressedString.length(); i++) {
             if (isNumber(compressedString.charAt(i))) {
                 number.append(compressedString.charAt(i));
-//                System.out.println(number.toString());
             }
             else {
                 int n = Integer.parseInt(number.toString());
