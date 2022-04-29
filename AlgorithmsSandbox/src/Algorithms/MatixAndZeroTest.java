@@ -20,7 +20,6 @@ class MatixAndZeroTest {
 
     @Test
     void spreadZeros() {
-        System.out.println(Arrays.deepToString(MatrixGenerator.getManualMatrix()));
         System.out.println(Arrays.deepToString(MatixAndZero.spreadZeros(MatrixGenerator.getManualMatrix())));
     }
 }
