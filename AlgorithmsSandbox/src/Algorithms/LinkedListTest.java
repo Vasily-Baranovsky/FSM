@@ -43,4 +43,35 @@ class LinkedListTest {
 
         System.out.println(list);
     }
+
+    @Test
+    void sumTwoElements() {
+        LinkedList firstList = new LinkedList(new int[]{1, 2, 3, 4, 5, 9, 1, 9, 1});
+        System.out.println(firstList);
+
+        LinkedList secondList = new LinkedList(new int[]{5, 9, 3, 5, 7});
+        System.out.println(secondList);
+
+        LinkedList result = LinkedList.addLists(firstList, secondList);
+        System.out.println(result);
+    }
+
+    @Test
+    void isPalindrome() {
+        LinkedList trueCase = new LinkedList(new int[] {1, 2, 3, 2, 1});
+        assertTrue(trueCase.isPalindrome());
+        System.out.println(trueCase);
+
+        LinkedList falseCase = new LinkedList(new int[] {1, 2, 3, 4, 5});
+        assertFalse(falseCase.isPalindrome());
+        System.out.println(falseCase);
+
+        LinkedList oneElement = new LinkedList(new int[] {1});
+        assertFalse(falseCase.isPalindrome());
+        System.out.println(oneElement);
+
+        LinkedList twoElements = new LinkedList(new int[] {1,1});
+        assertFalse(falseCase.isPalindrome());
+        System.out.println(twoElements);
+    }
 }

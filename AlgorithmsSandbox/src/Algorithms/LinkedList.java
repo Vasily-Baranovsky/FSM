@@ -7,6 +7,13 @@ public class LinkedList {
         head = new Node (firstValue);
     }
 
+    LinkedList (int[] array) {
+        this(array[0]);
+        for (int i=1; i<array.length; i++) {
+            addToTail(array[i]);
+        }
+    }
+
     public Node addToTail (Node node) {
         if (head == null) {
             head = node;
@@ -45,6 +52,63 @@ public class LinkedList {
         return main;
     }
 
+
+    private static int sumTwoElements(Node firstElement, Node secondElement) {
+        int sum=0;
+        if (firstElement!=null) {
+            sum = firstElement.value;
+        }
+        if (secondElement!=null) {
+            sum = sum + secondElement.value;
+        }
+        return sum;
+    }
+
+    public static LinkedList addLists (LinkedList firstList, LinkedList secondList) {
+        int valueInMind;
+        LinkedList resultList;
+
+        //if one of the lists is null or empty algorythm does not handle it
+        if (firstList==null || secondList == null) {
+            return null;
+        }
+
+        int headSum = sumTwoElements(firstList.head, secondList.head);
+
+        if (headSum>=10) {
+            valueInMind = 1;
+         } else {
+            valueInMind = 0;
+        }
+
+        resultList = new LinkedList(headSum%10);
+
+        Node firstListIterator = firstList.head.next;
+        Node secondListIterator	= secondList.head.next;
+
+        while (firstListIterator != null || secondListIterator != null) {
+            int sum = sumTwoElements(firstListIterator, secondListIterator) + valueInMind;
+            if (sum >= 10) {
+                valueInMind = 1;
+            } else {
+                valueInMind = 0;
+            }
+            resultList.addToTail(sum%10);
+            if (firstListIterator != null) {
+                firstListIterator = firstListIterator.next;
+            }
+            if (secondListIterator != null) {
+                secondListIterator = secondListIterator.next;
+            }
+        }
+
+        if (valueInMind>0) {
+            resultList.addToTail(1);
+        }
+        return resultList;
+    }
+
+
     public void partition (int value) {
         Node leftPartition = null;
         Node leftPartitionTail = null;
@@ -75,15 +139,65 @@ public class LinkedList {
 
     @Override
     public String toString() {
-        StringBuilder buffer = new StringBuilder();
+        return printFromNode(head);
+    }
 
-        Node currentNode = head;
+    public static String printFromNode (Node node) {
+        StringBuilder buffer = new StringBuilder();
+        Node currentNode = node;
 
         while (currentNode != null) {
             buffer.append(currentNode.value);
-            buffer.append(", ");
+            buffer.append("->");
             currentNode = currentNode.next;
         }
         return buffer.toString();
+    }
+
+    public boolean isPalindrome () {
+        if (head == null || head.next == null) {
+            return true;
+        }
+
+        Node measuringPointer = head.next;
+        Node middlePointer = head;
+        Node rearPointer = null;
+        Node nextMiddlePointer = middlePointer.next;
+
+        boolean lengthIsEven = true;
+        while (measuringPointer.next != null) {
+            measuringPointer = measuringPointer.next;
+
+            nextMiddlePointer = middlePointer.next;
+            middlePointer.next = rearPointer;
+            rearPointer = middlePointer;
+
+            if (measuringPointer.next != null) {
+                measuringPointer = measuringPointer.next;
+                middlePointer = nextMiddlePointer;
+            } else {
+                lengthIsEven = false;
+            }
+        }
+        Node secondBranchPointer = lengthIsEven ? nextMiddlePointer : nextMiddlePointer.next;
+
+        boolean isItAPalindrome = true;
+
+        Node firstBranchPointer = middlePointer;
+        Node nextElementPointer = nextMiddlePointer;
+
+        System.out.println(printFromNode(firstBranchPointer));
+        System.out.println(printFromNode(secondBranchPointer));
+        while (secondBranchPointer != null) {
+            isItAPalindrome = isItAPalindrome && secondBranchPointer.value == firstBranchPointer.value;
+
+            Node tmp = firstBranchPointer.next;
+            firstBranchPointer.next = nextElementPointer;
+            nextElementPointer = firstBranchPointer;
+            firstBranchPointer = tmp;
+            secondBranchPointer = secondBranchPointer.next;
+        }
+
+        return 	isItAPalindrome;
     }
 }
