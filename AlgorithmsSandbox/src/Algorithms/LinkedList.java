@@ -200,4 +200,49 @@ public class LinkedList {
 
         return 	isItAPalindrome;
     }
-}
+
+    public Node findIntersection(LinkedList list) {
+        int firstListCount = 1;
+        Node firstListTail = head;
+        while (firstListTail.next!=null) {
+            firstListTail = firstListTail.next;
+            firstListCount++;
+        }
+
+        int secondListCount = 1;
+        Node secondListTail = list.head;
+        while (secondListTail.next!=null) {
+            secondListTail = secondListTail.next;
+            secondListCount++;
+        }
+
+        if (firstListTail!=secondListTail) {
+            return null;
+        }
+
+        Node firstPointer = head;
+        Node secondPointer = list.head;
+        int lengthDifference = firstListCount - secondListCount;
+        int commonLength = 0;
+        if (lengthDifference >= 0) {
+            for (int i = lengthDifference-1; i>=0; i--) {
+                firstPointer = firstPointer.next;
+            }
+            commonLength = secondListCount;
+        } else {
+            for (int i=lengthDifference+1; i<=0; i++) {
+                secondPointer = secondPointer.next;
+            }
+            commonLength = firstListCount;
+        }
+
+        for (int i=0; i < commonLength; i++) {
+            if (firstPointer==secondPointer) {
+                return firstPointer;
+            }
+            firstPointer=firstPointer.next;
+            secondPointer=secondPointer.next;
+        }
+        return null;
+    }
+ }

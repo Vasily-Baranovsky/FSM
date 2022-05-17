@@ -74,4 +74,19 @@ class LinkedListTest {
         assertFalse(falseCase.isPalindrome());
         System.out.println(twoElements);
     }
+    @Test
+    void findIntersection () {
+        LinkedList firstList = new LinkedList(new int[] {1,2,3,4,5,6,7});
+        LinkedList secondList = new LinkedList(new int[] {-1,-2,-3});
+
+        Node secondListConnector = secondList.head;
+        while (secondListConnector.next!=null) {
+            secondListConnector = secondListConnector.next;
+        }
+        secondListConnector.next = firstList.head.next;
+
+        System.out.println(firstList);
+        System.out.println(secondList);
+        System.out.println(firstList.findIntersection(secondList).value);
+    }
 }
