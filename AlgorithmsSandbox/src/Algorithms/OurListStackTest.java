@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class OurListStackTest {
+
     @Test
     void smokeTest(){
         OurStack stack = new OurListStack();
@@ -16,12 +17,15 @@ class OurListStackTest {
 
         for (int i=0; i<10; i++) {
             try {
+                System.out.print("isEmpty(): " + stack.isEmpty() + "; ");
                 System.out.print("peek:" + stack.peek()+ "; ");
                 System.out.println("pop: " + stack.pop());
             } catch (StackIsEmptyException e) {
                 fail("Stack is empty, when should not");
             }
         }
+
+        System.out.println("isEmpty(): " + stack.isEmpty());
 
         try {
             stack.pop();
