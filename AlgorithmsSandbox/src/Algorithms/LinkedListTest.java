@@ -2,6 +2,9 @@ package Algorithms;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class LinkedListTest {
@@ -88,5 +91,34 @@ class LinkedListTest {
         System.out.println(firstList);
         System.out.println(secondList);
         System.out.println(firstList.findIntersection(secondList).value);
+    }
+
+
+    private static class ListWithLoop {
+        LinkedList list;
+        Node loopStart;
+
+        ListWithLoop(LinkedList list, Node loopStart) {
+            this.list = list;
+            this.loopStart = loopStart;
+        }
+
+
+        public static ListWithLoop[] getManualExamples () {
+            ListWithLoop[] testDataArray = new ListWithLoop[1];
+            LinkedList list1 = new LinkedList(new int[]{1, 2, 3, 4, 5, 6});
+            Node loopStart1 = list1.getKthFromTail(4);
+            list1.addToTail(loopStart1);
+            testDataArray[0] = new ListWithLoop(list1, loopStart1);
+            return testDataArray;
+        }
+    }
+
+    @Test
+    void findLoopStart() {
+        for (ListWithLoop listWithLoop: ListWithLoop.getManualExamples()) {
+            assertTrue(listWithLoop.loopStart == listWithLoop.list.findLoopStart());
+            System.out.println(listWithLoop.loopStart.value);
+        }
     }
 }

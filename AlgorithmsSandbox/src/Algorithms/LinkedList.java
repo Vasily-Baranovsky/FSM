@@ -245,4 +245,32 @@ public class LinkedList {
         }
         return null;
     }
+
+    public Node findLoopStart () {
+        Node fastWalker = head;
+        Node slowWalker = head;
+
+
+        do {
+            fastWalker = fastWalker.next;
+            if (fastWalker == null) {
+                return null;
+            } else {
+                fastWalker = fastWalker.next;
+            }
+            slowWalker = slowWalker.next;
+        } while (slowWalker != fastWalker && fastWalker != null);
+
+        if (fastWalker==null) {
+            return null;
+        }
+
+        Node rootWalker = head;
+
+        while (rootWalker != fastWalker) {
+            rootWalker = rootWalker.next;
+            fastWalker = fastWalker.next;
+        }
+        return rootWalker;
+    }
  }
