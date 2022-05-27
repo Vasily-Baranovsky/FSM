@@ -4,13 +4,18 @@ import Algorithms.QueueIsEmptyException;
 
 public class Shelter {
 
-    private class AnimalInShelter {
+    public class AnimalInShelter {
         Animal animal;
         int number;
 
         AnimalInShelter(Animal animal, int number) {
             this.animal = animal;
             this.number = number;
+        }
+
+        @Override
+        public String toString() {
+            return "(" + animal.toString() + ": " + number + ")";
         }
         //todo: use as example on static
     }
@@ -53,7 +58,7 @@ public class Shelter {
 
     public Dog dequeueDog() {
         try {
-            return (Dog)catsQueue.remove().animal;
+            return (Dog)dogsQueue.remove().animal;
         } catch (QueueIsEmptyException e) {
             return null;
         }
@@ -65,5 +70,15 @@ public class Shelter {
         } catch (QueueIsEmptyException e) {
             return null;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("DogsQueue: ").append(dogsQueue).append("; ");
+        builder.append("CatsQueue: ").append(catsQueue).append("; ");
+        builder.append("nextFreeNumber: ").append(nextFreeNumber);
+        builder.append("\n");
+        return builder.toString();
     }
 }
