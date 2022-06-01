@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ShelterTest {
     Shelter shelter;
-    private static final int NUMBER_OF_ANIMALS_IN_RANDOM_TEST = 10000;
+    private static final int NUMBER_OF_ANIMALS_IN_RANDOM_TEST = 30000;
     @BeforeEach
     void setUp () {
          shelter = new Shelter();
@@ -51,12 +51,12 @@ class ShelterTest {
         for (int i=0; i < NUMBER_OF_ANIMALS_IN_RANDOM_TEST; i++) {
             shelter.enqueue(testAnimals[i]);
         }
-        System.out.println(shelter);
+        //System.out.println(shelter);
 
         for (int i=0; i < NUMBER_OF_ANIMALS_IN_RANDOM_TEST; i++) {
             assertSame(shelter.dequeueAny(), testAnimals[i]);
         }
-        System.out.println(shelter);
+        //System.out.println(shelter);
     }
 
     @Test
