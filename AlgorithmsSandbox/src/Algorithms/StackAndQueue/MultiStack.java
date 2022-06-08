@@ -5,19 +5,19 @@ import java.util.ArrayList;
 public class MultiStack {
     ArrayList<ArrayStack> multiStack; // здесь полки!
     int multiStackLength; // здесь тарелки!
-    int singleStackLength; //это константа!!!!!!!!!!!!!!!!!!!111 - максимальный размер одного стека
+    int SINGLE_STACK_LENGTH; //это константа!!!!!!!!!!!!!!!!!!!111 - максимальный размер одного стека
 
     public MultiStack(int singleStackLength) {
         multiStack = new ArrayList<ArrayStack>();
         multiStackLength = 0;
-        this.singleStackLength = singleStackLength;
+        this.SINGLE_STACK_LENGTH = singleStackLength;
     }
 
     public void push(int value) {
         multiStackLength++;
         int stackIndex = getStackIndex();//количество полок!
         if (multiStack.size() <= stackIndex) {
-            multiStack.add(new ArrayStack(singleStackLength)); //use previously written stack
+            multiStack.add(new ArrayStack(SINGLE_STACK_LENGTH)); //use previously written stack
         }
         ArrayStack currentStack = multiStack.get(stackIndex);
         try {
@@ -63,7 +63,7 @@ public class MultiStack {
     }
 
     public int getStackIndex() {
-        return (multiStackLength - 1) / singleStackLength;
+        return (multiStackLength - 1) / SINGLE_STACK_LENGTH;
     }
 
     @Override
