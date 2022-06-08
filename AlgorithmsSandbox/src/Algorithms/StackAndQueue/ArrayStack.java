@@ -1,7 +1,5 @@
 package Algorithms.StackAndQueue;
 
-import java.lang.reflect.Array;
-
 public class ArrayStack {
 
     int[] array;
@@ -37,10 +35,24 @@ public class ArrayStack {
         }
         return array[stackLength-1];
     }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Array: ");
+        for (int i = 0; i < array.length; i++) {
+            stringBuilder.append(array[i]);
+            if(i != array.length - 1) {
+                stringBuilder.append(", ");
+            }
+        }
+        stringBuilder.append("; ");
+        stringBuilder.append("stackLength: ").append(stackLength);
+        stringBuilder.append("; ");
+        return stringBuilder.toString();
+    }
 }
 
 class StackIsEmptyException extends Exception {}
 
 class StackOverflowException extends Exception {}
-
-

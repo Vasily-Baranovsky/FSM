@@ -4,6 +4,7 @@ import Algorithms.StackIsEmptyException;
 import org.junit.jupiter.api.Test;
 
 import java.rmi.MarshalException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
