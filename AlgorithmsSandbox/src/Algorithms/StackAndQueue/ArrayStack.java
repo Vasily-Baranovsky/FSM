@@ -5,6 +5,8 @@ public class ArrayStack {
     int[] array;
     int stackLength = 0;
 
+    public int getMaxLength() { return array.length; }
+
     public ArrayStack(int maxLength) {
         array = new int[maxLength];
     }
@@ -41,7 +43,12 @@ public class ArrayStack {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Array: ");
         for (int i = 0; i < array.length; i++) {
-            stringBuilder.append(array[i]);
+            if (i<stackLength) {
+                stringBuilder.append(array[i]);
+            }
+            else {
+                stringBuilder.append("x");
+            }
             if(i != array.length - 1) {
                 stringBuilder.append(", ");
             }
