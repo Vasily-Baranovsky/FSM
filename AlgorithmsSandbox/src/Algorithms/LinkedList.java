@@ -3,6 +3,9 @@ package Algorithms;
 public class LinkedList {
     Node head;
 
+    LinkedList() {
+        head = null;
+    }
     LinkedList(int firstValue) {
         head = new Node (firstValue);
     }
@@ -199,6 +202,63 @@ public class LinkedList {
         }
 
         return 	isItAPalindrome;
+    }
+
+    public Node areListsIntersect(LinkedList list2) {
+        IntNodePair list1Pair = getLengthAndLastNode(this);
+        IntNodePair list2Pair = getLengthAndLastNode(list2);
+
+        // no intersection
+        if (!list1Pair.node.equals(list2Pair.node)) {
+            return null;
+        }
+
+        int delta =0;
+        Node resultNode=null;
+        if (list2Pair.intValue >= list1Pair.intValue) {
+            delta = list2Pair.intValue - list1Pair.intValue;
+            resultNode = findIntersection(this, list2, delta);
+        }
+        else {
+            delta = list1Pair.intValue - list2Pair.intValue;
+            resultNode = findIntersection(list2, this, delta);
+        }
+
+        return resultNode;
+    }
+
+    private static Node findIntersection(LinkedList shortList, LinkedList longList, int delta) {
+        Node resultNode=null;
+
+        resultNode=longList.head;
+        while (delta != 0) {
+            resultNode = resultNode.next;
+            delta--;
+        }
+
+        Node tmpNodeList1 = shortList.head;
+        while (resultNode != null && !resultNode.equals(tmpNodeList1)) {
+            resultNode = resultNode.next;
+            tmpNodeList1 = tmpNodeList1.next;
+        }
+
+        return resultNode;
+    }
+    public IntNodePair getLengthAndLastNode(LinkedList list) {
+
+        int len 		= 0;
+        Node tmp 		= list.head;
+        Node lastNode	= list.head;
+        while (tmp != null) {
+            len++;
+            if (tmp.next == null) {
+                lastNode = tmp;
+            }
+            tmp = tmp.next;
+        }
+
+        IntNodePair result = new IntNodePair(len, lastNode);
+        return result;
     }
 
     public Node findIntersection(LinkedList list) {

@@ -121,4 +121,61 @@ class LinkedListTest {
             System.out.println(listWithLoop.loopStart.value);
         }
     }
+
+    @Test
+    void isIntersection() {
+        LinkedList list1 = new LinkedList(new int[] {1, 2, 3, 4, 5});
+        System.out.print("List1: ");
+        System.out.println(list1);
+        LinkedList list2 = new LinkedList(new int[] {11, 12, 13, 14, 15});
+        list2.addToTail(list1.getKthFromTail(3));
+        System.out.print("List2: ");
+        System.out.println(list2);
+
+        Node intersectionNode = list1.areListsIntersect(list2);
+        System.out.print("Intersection node list1 and list2: ");
+        System.out.println(intersectionNode);
+
+        intersectionNode = list2.areListsIntersect(list1);
+        System.out.print("Intersection node list2 and list1: ");
+        System.out.println(intersectionNode);
+
+        LinkedList list3 = new LinkedList(new int[] {21, 22, 23, 24, 25});
+        list3.addToTail(list1.head);
+        System.out.print("List3: ");
+        System.out.println(list3);
+
+        intersectionNode = list1.areListsIntersect(list3);
+        System.out.print("Intersection node list1 and list3: ");
+        System.out.println(intersectionNode);
+
+        LinkedList list4 = new LinkedList(new int[] {31});
+        list4.addToTail(list1.getKthFromTail(4));
+        System.out.print("List4: ");
+        System.out.println(list4);
+
+        intersectionNode = list1.areListsIntersect(list4);
+        System.out.print("Intersection node list1 and list4: ");
+        System.out.println(intersectionNode);
+
+        intersectionNode = list4.areListsIntersect(list1);
+        System.out.print("Intersection node list4 and list1: ");
+        System.out.println(intersectionNode);
+    }
+
+    @Test
+    void findLoop() {
+        MarkedLinkedList list = new MarkedLinkedList(1);
+        list.addToTail(new MarkedNode(2, null));
+        MarkedNode nd = new MarkedNode(3, null);
+        list.addToTail(nd);
+        list.addToTail(new MarkedNode(4, null));
+        list.addToTail(new MarkedNode(5, null));
+        list.addToTail(new MarkedNode(6, null));
+        list.addToTail(new MarkedNode(7, nd));
+
+        MarkedNode result = list.findLoop();
+        System.out.println("Loop starts at node: " + result);
+        System.out.println(list);
+    }
 }
