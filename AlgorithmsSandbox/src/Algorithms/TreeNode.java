@@ -1,4 +1,8 @@
 package Algorithms;
+
+import com.sun.source.tree.Tree;
+
+import java.util.ArrayList;
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -33,10 +37,65 @@ public class TreeNode {
         }
     }
 
+    public ArrayList<LinkedList<TreeNode>> createListOfDepthsWithoutQueue() {
+        ArrayList<LinkedList<TreeNode>> listOfLevels = new ArrayList<>();
+        LinkedList<TreeNode> treeLevel = new LinkedList<>();
+        treeLevel.add(this);
+        listOfLevels.add(treeLevel);
+        LinkedList<TreeNode> previousLevel = treeLevel;
+        while(!previousLevel.isEmpty()) {
+            LinkedList<TreeNode> currentLevel = new LinkedList<>();
+            for (TreeNode currentElement : previousLevel) {
+                if (currentElement.left != null) {
+                    currentLevel.add(currentElement.left);
+                }
+                if (currentElement.right != null) {
+                    currentLevel.add(currentElement.right);
+                }
+            }
+            if (!currentLevel.isEmpty()){
+                listOfLevels.add(currentLevel);
+            }
+            previousLevel = currentLevel;
+        }
+        return listOfLevels;
+    }
+
+    public ArrayList<LinkedList<TreeNode>> createListOfDepths() {
+        ArrayList<LinkedList<TreeNode>> listOfLevels = new ArrayList<>();
+        LinkedList<TreeNode> treeLevel = new LinkedList<>();
+        listOfLevels.add(treeLevel);
+        Queue<DepthContainer> queue = new LinkedList<>();						// как обойтись без queue?
+
+        queue.add (new DepthContainer(this, 0));
+        int currentLevel = 0;
+        while (! queue.isEmpty()) {
+            DepthContainer currentElement = queue.poll();
+            if (currentElement.level > currentLevel) {
+                currentLevel = currentElement.level;
+                treeLevel = new LinkedList<>();
+                listOfLevels.add(treeLevel);
+            }
+            if (currentElement.node.left != null) {
+                queue.add(new DepthContainer(currentElement.node.left, currentElement.level + 1));
+            }
+            if (currentElement.node.right != null) {
+                queue.add(new DepthContainer(currentElement.node.right, currentElement.level + 1));
+            }
+            treeLevel.add(currentElement.node);
+
+        }
+        return listOfLevels;
+    }
+
     private static final int TEXT_WIDTH = 80;
 
     @Override
     public String toString() {
+        return  String.valueOf(value);
+    }
+
+    public String subTreeToString() {
         StringBuilder result = new StringBuilder();
         Queue<DepthContainer> queue = new LinkedList<>(); //add, poll
 
