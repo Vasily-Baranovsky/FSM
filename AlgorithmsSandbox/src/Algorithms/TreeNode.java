@@ -3,6 +3,7 @@ package Algorithms;
 import com.sun.source.tree.Tree;
 
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.Queue;
 import java.util.LinkedList;
 
@@ -146,6 +147,28 @@ public class TreeNode {
         public DepthContainer (TreeNode node, int level) {
             this.node = node;
             this.level = level;
+        }
+    }
+
+    public boolean checkIfBalanced () {
+        return getDepth() >=0;
+    }
+
+    private int getDepth () {
+        int depthLeft = 0;
+        if(left!=null) {
+            depthLeft = left.getDepth();
+        }
+
+        int depthRight = 0;
+        if (right!=null) {
+            depthRight=right.getDepth();
+        }
+
+        if(depthLeft>=0 && depthRight>=0 && Math.abs(depthLeft-depthRight) <= 1) {
+            return Math.max(depthLeft, depthRight)+1;
+        } else {
+            return -1;
         }
     }
 }

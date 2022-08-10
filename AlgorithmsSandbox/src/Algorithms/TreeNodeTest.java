@@ -5,6 +5,9 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 public class TreeNodeTest {
 
     @Test
@@ -44,5 +47,16 @@ public class TreeNodeTest {
             stringBuilder.append("\n");
         }
         return stringBuilder.toString();
+    }
+
+    @Test
+    public void checkIfBalancedTest() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(5);
+        assertTrue(root.checkIfBalanced());
+
+        root.left.left = new TreeNode(3);
+        assertFalse(root.checkIfBalanced());
+
     }
 }
